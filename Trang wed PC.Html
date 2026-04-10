@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GEAR PC - Hệ Thống Linh Kiện 20 Sản Phẩm</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .category-scrollbar::-webkit-scrollbar { width: 5px; }
+        .category-scrollbar::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 10px; }
+        .product-card { transition: all 0.3s ease; }
+        .product-card:hover { transform: translateY(-8px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); }
+        html { scroll-behavior: smooth; }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-900">
+
+    <header class="bg-slate-900 text-white shadow-xl sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <i class="fas fa-bolt text-yellow-400 text-3xl"></i>
+                <h1 class="text-2xl font-black italic tracking-tighter">GEAR <span class="text-blue-500">PC</span></h1>
+            </div>
+            <nav class="hidden lg:flex gap-8 text-xs font-bold uppercase tracking-widest">
+                <a href="#cua-hang" class="hover:text-blue-400 transition">Cửa hàng</a>
+                <a href="#gioi-thieu" class="hover:text-blue-400 transition">Giới thiệu</a>
+                <a href="#lien-he" class="hover:text-blue-400 transition">Liên hệ</a>
+                <a href="#chinh-sach" class="hover:text-blue-400 transition">Chính sách</a>
+            </nav>
+            <div class="flex gap-4">
+                <button class="bg-blue-600 px-5 py-2 rounded-full text-xs font-bold hover:bg-blue-700 transition">Đăng nhập</button>
+            </div>
+        </div>
+    </header>
+
+    <section id="gioi-thieu" class="bg-slate-900 text-white py-20 relative overflow-hidden">
+        <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-12 items-center relative z-10">
+            <div>
+                <h2 class="text-4xl md:text-6xl font-black mb-6 leading-tight uppercase">Thế giới <span class="text-blue-500">PC High-End</span></h2>
+                <p class="text-slate-400 text-lg mb-8 leading-relaxed">
+                    Chào mừng bạn đến với <strong>GEAR PC</strong>. Chúng tôi chuyên cung cấp giải pháp phần cứng máy tính tối tân nhất. Với 20 sản phẩm chủ đạo được tuyển chọn, chúng tôi cam kết mang lại hiệu năng đỉnh cao cho mọi Game thủ và Designer.
+                </p>
+                <div class="flex gap-4">
+                    <a href="#cua-hang" class="bg-blue-600 text-white px-8 py-3 rounded-xl font-bold hover:scale-105 transition shadow-lg shadow-blue-500/20">Mua ngay</a>
+                    <a href="#chinh-sach" class="border border-slate-700 px-8 py-3 rounded-xl font-bold hover:bg-slate-800 transition">Xem chính sách</a>
+                </div>
+            </div>
+            <div class="hidden md:block">
+                <img src="https://images.unsplash.com/photo-1587202372775-e229f172b9d7?q=80&w=800&auto=format&fit=crop" class="rounded-3xl border-2 border-blue-500/20 shadow-2xl rotate-2">
+            </div>
+        </div>
+    </section>
+
+    <div id="cua-hang" class="container mx-auto grid grid-cols-12 gap-8 py-12 px-4">
+        
+        <aside class="col-span-12 md:col-span-3">
+            <div class="bg-white rounded-3xl shadow-sm border border-gray-100 p-6 sticky top-28">
+                <h2 class="font-black text-gray-800 mb-6 flex items-center gap-2 uppercase text-sm tracking-widest border-b pb-4">
+                    <i class="fas fa-th-large text-blue-600"></i> Danh mục
+                </h2>
+                <ul id="category-menu" class="space-y-2 category-scrollbar"></ul>
+            </div>
+        </aside>
+
+        <main class="col-span-12 md:col-span-9 space-y-10">
+            
+            <section class="bg-white p-8 rounded-3xl shadow-sm border border-blue-100">
+                <h3 class="font-bold text-gray-800 mb-6 flex items-center gap-2 uppercase tracking-wide text-sm">
+                    <i class="fas fa-plus-circle text-green-500"></i> Đăng sản phẩm mới (Kèm ảnh)
+                </h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
+                    <input id="input-name" type="text" placeholder="Tên sản phẩm..." class="bg-gray-50 border p-3 rounded-xl text-sm outline-blue-500">
+                    <input id="input-price" type="text" placeholder="Giá (VD: 15.000.000)..." class="bg-gray-50 border p-3 rounded-xl text-sm outline-blue-500">
+                    <select id="select-category" class="bg-gray-50 border p-3 rounded-xl text-sm outline-blue-500 cursor-pointer"></select>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="relative">
+                        <input id="input-image" type="file" accept="image/*" class="hidden">
+                        <label for="input-image" id="label-image" class="flex items-center justify-center border-2 border-dashed border-blue-200 rounded-xl p-3 text-sm text-gray-500 cursor-pointer hover:border-blue-500 hover:bg-blue-50 transition-all font-medium">
+                            <i class="fas fa-cloud-upload-alt mr-2 text-blue-500"></i> Nhấn để tải ảnh từ máy
+                        </label>
+                    </div>
+                    <button onclick="handleFormSubmit()" class="bg-slate-900 text-white font-bold rounded-xl hover:bg-blue-600 transition shadow-lg uppercase text-sm tracking-widest">Xác nhận đăng tải</button>
+                </div>
+            </section>
+
+            <div id="product-display" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 pb-20"></div>
+        </main>
+    </div>
+
+    <section id="chinh-sach" class="bg-gray-100 py-20 border-t">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-black mb-12 text-center uppercase tracking-tighter italic">Quyền lợi khách hàng tại <span class="text-blue-600">GEAR PC</span></h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-10 rounded-3xl shadow-sm hover:shadow-md transition">
+                    <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mb-6 text-blue-600 text-2xl"><i class="fas fa-truck-fast"></i></div>
+                    <h4 class="font-bold text-xl mb-4 uppercase">Giao hàng 2H</h4>
+                    <p class="text-gray-500 text-sm leading-relaxed">Chúng tôi cam kết giao hàng hỏa tốc trong vòng 2 giờ tại nội thành. Đóng gói 3 lớp chống sốc tuyệt đối.</p>
+                </div>
+                <div class="bg-white p-10 rounded-3xl shadow-sm hover:shadow-md transition">
+                    <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center mb-6 text-red-600 text-2xl"><i class="fas fa-shield-halved"></i></div>
+                    <h4 class="font-bold text-xl mb-4 uppercase">Bảo hành 1-ĐỔI-1</h4>
+                    <p class="text-gray-500 text-sm leading-relaxed">Chính sách bảo hành vàng: Lỗi là đổi mới trong 30 ngày đầu tiên. Xử lý bảo hành không quá 48 tiếng.</p>
+                </div>
+                <div class="bg-white p-10 rounded-3xl shadow-sm hover:shadow-md transition">
+                    <div class="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mb-6 text-green-600 text-2xl"><i class="fas fa-screwdriver-wrench"></i></div>
+                    <h4 class="font-bold text-xl mb-4 uppercase">Hỗ trợ trọn đời</h4>
+                    <p class="text-gray-500 text-sm leading-relaxed">Cài đặt phần mềm, vệ sinh máy và tra keo tản nhiệt miễn phí trọn đời sản phẩm mua tại cửa hàng.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="lien-he" class="bg-slate-900 text-white pt-16 pb-8">
+        <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-12 border-b border-slate-800 pb-12">
+            <div>
+                <h4 class="text-2xl font-black mb-6 text-blue-500 italic uppercase">GEAR PC Store</h4>
+                <p class="text-slate-400 text-sm leading-relaxed mb-6">Đơn vị uy tín số 1 Việt Nam về lắp đặt PC Gaming High-End và Workstation chuyên nghiệp.</p>
+                <div class="flex gap-4">
+                    <div class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition cursor-pointer"><i class="fab fa-facebook-f"></i></div>
+                    <div class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition cursor-pointer"><i class="fab fa-youtube"></i></div>
+                </div>
+            </div>
+            <div>
+                <h4 class="font-bold text-lg mb-6 uppercase border-l-4 border-blue-500 pl-4">Thông tin liên hệ</h4>
+                <ul class="space-y-4 text-slate-400 text-sm">
+                    <li class="flex items-center gap-3"><i class="fas fa-location-dot text-blue-500"></i> Bùi Thị Xuân, Q.1, TP. Hồ Chí Minh</li>
+                    <li class="flex items-center gap-3"><i class="fas fa-phone text-blue-500"></i> Hotline: 0909.123.456</li>
+                    <li class="flex items-center gap-3"><i class="fas fa-envelope text-blue-500"></i> sales@gearpc.vn</li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold text-lg mb-6 uppercase border-l-4 border-blue-500 pl-4">Giờ làm việc</h4>
+                <p class="text-slate-400 text-sm">Thứ 2 - Chủ Nhật: 08:00 AM - 10:00 PM</p>
+                <p class="text-blue-500 text-xs mt-4 font-bold tracking-widest uppercase italic underline">Phục vụ xuyên lễ tết</p>
+            </div>
+        </div>
+        <div class="text-center mt-8 text-slate-600 text-[10px] uppercase font-bold tracking-[0.2em]">
+            &copy; 2026 Gear PC System | Thiết kế bởi GearPC
+        </div>
+    </footer>
+
+    <script>
+        const categories = ["CPU - Vi Xử Lý", "VGA - Card Đồ Họa", "Mainboard", "RAM", "SSD - Lưu Trữ", "Màn Hình", "Laptop", "Nguồn Máy Tính"];
+        const menuEl = document.getElementById('category-menu');
+        const selectEl = document.getElementById('select-category');
+        const displayEl = document.getElementById('product-display');
+        const imageInput = document.getElementById('input-image');
+        const labelImage = document.getElementById('label-image');
+
+        // Khởi tạo Danh mục
+        categories.forEach(cat => {
+            menuEl.innerHTML += `<li><a href="#" class="flex justify-between items-center p-3 text-sm font-bold text-gray-600 hover:bg-blue-50 hover:text-blue-600 rounded-2xl transition-all group">${cat}<i class="fas fa-chevron-right text-[10px] opacity-0 group-hover:opacity-100 transition-all"></i></a></li>`;
+            selectEl.innerHTML += `<option value="${cat}">${cat}</option>`;
+        });
+
+        // Xử lý đổi giao diện khi chọn ảnh
+        imageInput.addEventListener('change', function() {
+            if (this.files && this.files[0]) {
+                labelImage.innerHTML = `<i class="fas fa-check-circle text-green-500 mr-2"></i> Đã chọn xong ảnh`;
+                labelImage.classList.replace('border-blue-200', 'border-green-500');
+                labelImage.classList.add('bg-green-50', 'text-green-700');
+            }
+        });
+
+        function handleFormSubmit() {
+            const name = document.getElementById('input-name').value;
+            const price = document.getElementById('input-price').value;
+            const cat = document.getElementById('select-category').value;
+            const sku = "SKU-" + Math.floor(Math.random() * 9000 + 1000);
+            const desc = "Sản phẩm chính hãng tại GEAR PC, hỗ trợ trả góp 0%, bảo hành 36 tháng.";
+
+            if(!name || !price) return alert("Vui lòng điền đủ thông tin!");
+
+            if (imageInput.files && imageInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = (e) => addProductToUI(sku, name, price, cat, desc, e.target.result);
+                reader.readAsDataURL(imageInput.files[0]);
+            } else {
+                addProductToUI(sku, name, price, cat, desc, null);
+            }
+
+            // Reset Form
+            document.getElementById('input-name').value = "";
+            document.getElementById('input-price').value = "";
+            imageInput.value = "";
+            labelImage.innerHTML = `<i class="fas fa-cloud-upload-alt mr-2 text-blue-500"></i> Nhấn để tải ảnh từ máy`;
+            labelImage.className = "flex items-center justify-center border-2 border-dashed border-blue-200 rounded-xl p-3 text-sm text-gray-500 cursor-pointer hover:border-blue-500 hover:bg-blue-50 transition-all font-medium";
+        }
+
+        function addProductToUI(sku, name, price, cat, desc, imgSrc) {
+            const media = imgSrc 
+                ? `<img src="${imgSrc}" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-125">`
+                : `<i class="fas fa-image text-gray-200 text-6xl"></i>`;
+
+            const html = `
+                <div class="product-card bg-white p-5 rounded-[2.5rem] border border-gray-100 shadow-sm relative overflow-hidden group">
+                    <div class="absolute top-4 left-4 bg-slate-900/80 backdrop-blur-sm text-white text-[9px] font-black px-3 py-1 rounded-full z-10 tracking-widest uppercase">${sku}</div>
+                    <div class="h-56 bg-gray-50 rounded-[2rem] mb-6 flex items-center justify-center overflow-hidden border border-gray-100">
+                        ${media}
+                    </div>
+                    <div class="px-2">
+                        <span class="text-blue-600 font-black text-[10px] uppercase tracking-widest">${cat}</span>
+                        <h4 class="font-bold text-gray-800 text-lg mt-1 mb-2 line-clamp-1 uppercase">${name}</h4>
+                        <p class="text-gray-400 text-xs mb-6 line-clamp-2 leading-relaxed italic">${desc}</p>
+                        <div class="flex justify-between items-center">
+                            <p class="text-slate-900 font-black text-xl">${price} <span class="text-[10px] text-gray-400 font-normal">VNĐ</span></p>
+                            <button class="bg-blue-600 text-white w-12 h-12 rounded-2xl hover:bg-slate-900 transition-all shadow-lg shadow-blue-200 flex items-center justify-center">
+                                <i class="fas fa-cart-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            displayEl.insertAdjacentHTML('afterbegin', html);
+        }
+
+        // TỰ ĐỘNG NẠP 20 SẢN PHẨM MẪU CÓ SẴN ẢNH THẬT
+        window.onload = () => {
+            const samples = [
+                {sku: "CPU-01", n: "Intel Core i5-12400F", p: "4.500.000", c: "CPU", d: "Hiệu năng đa nhân mạnh mẽ nhất cho làm việc và chơi game.", img: "OIP.webp"},
+                {sku: "VGA-01", n: "ROG Strix RTX 4090 OC", p: "56.500.000", c: "VGA", d: "Vua đồ họa với khả năng xử lý Ray Tracing đỉnh cao.", img: "4090.png"},
+                {sku: "MB-01", n: "Z790 AORUS ELITE AX", p: "8.200.000", c: "Mainboard", d: "Bo mạch chủ cao cấp tích hợp Wifi 6E siêu tốc.", img: "z790.jpg"},
+                {sku: "RAM-01", n: "Corsair Vengeance RGB 32GB", p: "3.500.000", c: "RAM", d: "Bộ nhớ DDR5 Bus 6000MHz hiệu ứng LED rực rỡ.", img: "ram 32gb.jpg"},
+                {sku: "SSD-01", n: "Samsung 990 Pro 1TB", p: "2.950.000", c: "SSD", d: "Tốc độ đọc 7450MB/s, chuẩn NVMe PCIe 4.0 mới nhất.", img: "ssd ss 1t.webp"},
+                {sku: "MON-01", n: "Samsung Odyssey G9 49\"", p: "32.000.000", c: "Màn Hình", d: "Màn hình cong cực đại cho trải nghiệm đắm chìm.", img: "màn ss.webp"},
+                {sku: "LAP-01", n: "ROG Zephyrus G14 2024", p: "42.500.000", c: "Laptop", d: "Laptop gaming mỏng nhẹ, mạnh mẽ với màn hình OLED.", img: "laptop g14.webp"},
+                {sku: "PSU-01", n: "Corsair RM1000e 80+ Gold", p: "4.200.000", c: "Nguồn Máy Tính", d: "Nguồn công suất thực ổn định cho dàn máy khủng.", img: "nguon rm.jpg"},
+                {sku: "CPU-02", n: "AMD Ryzen 7 7800X3D", p: "10.500.000", c: "CPU", d: "Chip gaming tốt nhất thế giới với công nghệ 3D V-Cache.", img: "r7.webp"},
+                {sku: "VGA-02", n: "MSI RTX 4070 Ti Slim", p: "22.900.000", c: "VGA", d: "Thiết kế mỏng gọn nhưng hiệu năng cực khủng.", img: "4070.jpg"},
+                {sku: "MB-02", n: "ASUS ROG B760-F Gaming", p: "6.500.000", c: "Mainboard", d: "Sự lựa chọn hoàn hảo cho cấu hình Intel i7.", img: "b760.webp"},
+                {sku: "RAM-02", n: "Kingston Fury Beast 16GB", p: "1.600.000", c: "RAM", d: "Độ bền bỉ huyền thoại, tương thích mọi hệ thống.", img: "ram 16gb.webp"},
+                {sku: "SSD-02", n: "Crucial P3 Plus 500GB", p: "1.200.000", c: "SSD", d: "Giải pháp lưu trữ tốc độ cao giá cực tốt.", img: "ssd 500gb.jpg"},
+                {sku: "MON-02", n: "ASUS TUF VG27AQ 2K", p: "7.900.000", c: "Màn Hình", d: "Tần số quét 165Hz cho game bắn súng cực mượt.", img: "man 2k.webp"},
+                {sku: "LAP-02", n: "MSI Raider GE78 HX", p: "85.000.000", c: "Laptop", d: "Siêu phẩm laptop gaming mạnh nhất của MSI.", img: "laptop hx.webp"},
+                {sku: "PSU-02", n: "NZXT C850 Gold", p: "3.500.000", c: "Nguồn Máy Tính", d: "Thiết kế module toàn phần cực kỳ gọn gàng.", img: "nguon c850.jpg"},
+                {sku: "FAN-01", n: "ROG RYUJIN III 360", p: "8.900.000", c: "Laptop", d: "Tản nhiệt nước có màn hình LCD tùy biến cực chất.", img: "tan nhiet.webp"},
+                {sku: "GEAR-01", n: "Logitech G Pro X Superlight", p: "2.900.000", c: "RAM", d: "Chuột gaming không dây nhẹ nhất thế giới.", img: "chuot spl.png"},
+                {sku: "GEAR-02", n: "Bàn phím Akko 3087 V2", p: "1.350.000", c: "RAM", d: "Bàn phím cơ thiết kế đẹp, cảm giác gõ tốt.", img: "akko phim.webp"},
+                {sku: "CASE-01", n: "NZXT H9 Elite White", p: "6.500.000", c: "Laptop", d: "Vỏ case kính vô cực trưng bày linh kiện cực đẹp.", img: "case.jpg"}
+            ];
+            // Render đảo ngược để cái mới nhất lên trên
+            samples.reverse().forEach(s => addProductToUI(s.sku, s.n, s.p, s.c, s.d, s.img));
+        };
+    </script>
+</body>
+</html>
